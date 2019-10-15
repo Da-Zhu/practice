@@ -1,0 +1,16 @@
+..\..\output\code39.o: ..\..\zbar\decoder\code39.c
+..\..\output\code39.o: ..\..\zbar\config.h
+..\..\output\code39.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\code39.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\code39.o: ..\..\zbar\zbar.h
+..\..\output\code39.o: ..\..\zbar\decoder.h
+..\..\output\code39.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\code39.o: ..\..\zbar\decoder/ean.h
+..\..\output\code39.o: ..\..\zbar\decoder/i25.h
+..\..\output\code39.o: ..\..\zbar\decoder/code39.h
+..\..\output\code39.o: ..\..\zbar\decoder/code128.h
+..\..\output\code39.o: ..\..\zbar\decoder/pdf417.h
+..\..\output\code39.o: ..\..\zbar\decoder/qr_finder.h
+..\..\output\code39.o: ..\..\zbar\qrcode.h
+..\..\output\code39.o: ..\..\zbar\debug.h
+..\..\output\code39.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

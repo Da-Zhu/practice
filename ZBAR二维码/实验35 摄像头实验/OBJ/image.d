@@ -1,0 +1,15 @@
+..\obj\image.o: ..\ZBAR\image.c
+..\obj\image.o: ..\ZBAR\error.h
+..\obj\image.o: ..\ZBAR\config.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\obj\image.o: ..\ZBAR\zbar.h
+..\obj\image.o: ..\ZBAR\image.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\obj\image.o: ..\ZBAR\symbol.h
+..\obj\image.o: ..\ZBAR\refcnt.h
+..\obj\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h

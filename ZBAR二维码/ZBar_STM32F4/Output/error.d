@@ -1,0 +1,10 @@
+..\..\output\error.o: ..\..\zbar\error.c
+..\..\output\error.o: ..\..\zbar\error.h
+..\..\output\error.o: ..\..\zbar\config.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+..\..\output\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\error.o: ..\..\zbar\zbar.h

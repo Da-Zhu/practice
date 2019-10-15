@@ -1,0 +1,9 @@
+..\..\output\scanner.o: ..\..\zbar\scanner.c
+..\..\output\scanner.o: ..\..\zbar\config.h
+..\..\output\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\scanner.o: ..\..\zbar\zbar.h
+..\..\output\scanner.o: ..\..\zbar\svg.h
+..\..\output\scanner.o: ..\..\zbar\debug.h
+..\..\output\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

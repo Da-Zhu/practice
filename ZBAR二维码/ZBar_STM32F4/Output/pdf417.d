@@ -1,0 +1,16 @@
+..\..\output\pdf417.o: ..\..\zbar\decoder\pdf417.c
+..\..\output\pdf417.o: ..\..\zbar\config.h
+..\..\output\pdf417.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\pdf417.o: ..\..\zbar\zbar.h
+..\..\output\pdf417.o: ..\..\zbar\decoder.h
+..\..\output\pdf417.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/ean.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/i25.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/code39.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/code128.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/pdf417.h
+..\..\output\pdf417.o: ..\..\zbar\decoder/qr_finder.h
+..\..\output\pdf417.o: ..\..\zbar\qrcode.h
+..\..\output\pdf417.o: ..\..\zbar\decoder\pdf417_hash.h
+..\..\output\pdf417.o: ..\..\zbar\debug.h
+..\..\output\pdf417.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

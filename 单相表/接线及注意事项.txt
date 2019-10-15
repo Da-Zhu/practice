@@ -1,0 +1,9 @@
+SCLK  PA5
+DIN   PA7
+DOUT  PA6
+DRDY  PA2
+CS    PA3
+RESET PA4
+
+电源接5v
+数字地和模拟地可以用光耦或者0欧姆电阻隔离开

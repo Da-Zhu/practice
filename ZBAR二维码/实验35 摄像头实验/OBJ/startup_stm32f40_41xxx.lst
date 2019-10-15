@@ -1,0 +1,753 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;******************** (C) COPYRIGHT 2014 STMicroelectron
+                       ics ********************
+    2 00000000         ;* File Name          : startup_stm32f40_41xxx.s
+    3 00000000         ;* Author             : MCD Application Team
+    4 00000000         ;* @version           : V1.4.0
+    5 00000000         ;* @date              : 04-August-2014
+    6 00000000         ;* Description        : STM32F40xxx/41xxx devices vector
+                        table for MDK-ARM toolchain. 
+    7 00000000         ;*                      This module performs:
+    8 00000000         ;*                      - Set the initial SP
+    9 00000000         ;*                      - Set the initial PC == Reset_Ha
+                       ndler
+   10 00000000         ;*                      - Set the vector table entries w
+                       ith the exceptions ISR address
+   11 00000000         ;*                      - Configure the system clock and
+                        the external SRAM mounted on 
+   12 00000000         ;*                        STM324xG-EVAL board to be used
+                        as data memory (optional, 
+   13 00000000         ;*                        to be enabled by user)
+   14 00000000         ;*                      - Branches to __main in the C li
+                       brary (which eventually
+   15 00000000         ;*                        calls main()).
+   16 00000000         ;*                      After Reset the CortexM4 process
+                       or is in Thread mode,
+   17 00000000         ;*                      priority is Privileged, and the 
+                       Stack is set to Main.
+   18 00000000         ;* <<< Use Configuration Wizard in Context Menu >>>   
+   19 00000000         ;*******************************************************
+                       ************************
+   20 00000000         ; 
+   21 00000000         ; Licensed under MCD-ST Liberty SW License Agreement V2,
+                        (the "License");
+   22 00000000         ; You may not use this file except in compliance with th
+                       e License.
+   23 00000000         ; You may obtain a copy of the License at:
+   24 00000000         ; 
+   25 00000000         ;        http://www.st.com/software_license_agreement_li
+                       berty_v2
+   26 00000000         ; 
+   27 00000000         ; Unless required by applicable law or agreed to in writ
+                       ing, software 
+   28 00000000         ; distributed under the License is distributed on an "AS
+                        IS" BASIS, 
+   29 00000000         ; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either e
+                       xpress or implied.
+   30 00000000         ; See the License for the specific language governing pe
+                       rmissions and
+   31 00000000         ; limitations under the License.
+   32 00000000         ; 
+   33 00000000         ;*******************************************************
+                       ************************
+   34 00000000         
+   35 00000000         ; Amount of memory (in bytes) allocated for Stack
+   36 00000000         ; Tailor this value to your application needs
+   37 00000000         ; <h> Stack Configuration
+   38 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   39 00000000         ; </h>
+   40 00000000         
+   41 00000000         ;Stack_Size      EQU     0x00000400
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   42 00000000         
+   43 00000000         ;AREA    STACK, NOINIT, READWRITE, ALIGN=3
+   44 00000000         ;Stack_Mem       SPACE   Stack_Size
+   45 00000000         ;__initial_sp
+   46 00000000         
+   47 00000000         
+   48 00000000         ; <h> Heap Configuration
+   49 00000000         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   50 00000000         ; </h>
+   51 00000000         
+   52 00000000         ;Heap_Size       EQU     0x00000200
+   53 00000000         
+   54 00000000         ;AREA    HEAP, NOINIT, READWRITE, ALIGN=3
+   55 00000000         ;__heap_base
+   56 00000000         ;Heap_Mem        SPACE   Heap_Size
+   57 00000000         ;__heap_limit
+   58 00000000         
+   59 00000000         ;PRESERVE8
+   60 00000000         ;THUMB
+   61 00000000         
+   62 00000000         
+   63 00000000         ;; Vector Table Mapped to Address 0 at Reset
+   64 00000000         ;AREA    RESET, DATA, READONLY
+   65 00000000         ;EXPORT  __Vectors
+   66 00000000         ;EXPORT  __Vectors_End
+   67 00000000         ;EXPORT  __Vectors_Size
+   68 00000000         
+   69 00000000         ;__Vectors       DCD     __initial_sp               ; To
+                       p of Stack
+   70 00000000         ;DCD     Reset_Handler              ; Reset Handler
+   71 00000000         ;DCD     NMI_Handler                ; NMI Handler
+   72 00000000         ;DCD     HardFault_Handler          ; Hard Fault Handler
+                       
+   73 00000000         ;DCD     MemManage_Handler          ; MPU Fault Handler
+   74 00000000         ;DCD     BusFault_Handler           ; Bus Fault Handler
+   75 00000000         ;DCD     UsageFault_Handler         ; Usage Fault Handle
+                       r
+   76 00000000         ;DCD     0                          ; Reserved
+   77 00000000         ;DCD     0                          ; Reserved
+   78 00000000         ;DCD     0                          ; Reserved
+   79 00000000         ;DCD     0                          ; Reserved
+   80 00000000         ;DCD     SVC_Handler                ; SVCall Handler
+   81 00000000         ;DCD     DebugMon_Handler           ; Debug Monitor Hand
+                       ler
+   82 00000000         ;DCD     0                          ; Reserved
+   83 00000000         ;DCD     PendSV_Handler             ; PendSV Handler
+   84 00000000         ;DCD     SysTick_Handler            ; SysTick Handler
+   85 00000000         
+   86 00000000         ;; External Interrupts
+   87 00000000         ;DCD     WWDG_IRQHandler                   ; Window Watc
+                       hDog                                        
+   88 00000000         ;DCD     PVD_IRQHandler                    ; PVD through
+                        EXTI Line detection                        
+   89 00000000         ;DCD     TAMP_STAMP_IRQHandler             ; Tamper and 
+                       TimeStamps through the EXTI line            
+   90 00000000         ;DCD     RTC_WKUP_IRQHandler               ; RTC Wakeup 
+                       through the EXTI line                       
+   91 00000000         ;DCD     FLASH_IRQHandler                  ; FLASH      
+                                                            
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   92 00000000         ;DCD     RCC_IRQHandler                    ; RCC        
+                                                            
+   93 00000000         ;DCD     EXTI0_IRQHandler                  ; EXTI Line0 
+                                                                   
+   94 00000000         ;DCD     EXTI1_IRQHandler                  ; EXTI Line1 
+                                                                   
+   95 00000000         ;DCD     EXTI2_IRQHandler                  ; EXTI Line2 
+                                                                   
+   96 00000000         ;DCD     EXTI3_IRQHandler                  ; EXTI Line3 
+                                                                   
+   97 00000000         ;DCD     EXTI4_IRQHandler                  ; EXTI Line4 
+                                                                   
+   98 00000000         ;DCD     DMA1_Stream0_IRQHandler           ; DMA1 Stream
+                        0                                   
+   99 00000000         ;DCD     DMA1_Stream1_IRQHandler           ; DMA1 Stream
+                        1                                   
+  100 00000000         ;DCD     DMA1_Stream2_IRQHandler           ; DMA1 Stream
+                        2                                   
+  101 00000000         ;DCD     DMA1_Stream3_IRQHandler           ; DMA1 Stream
+                        3                                   
+  102 00000000         ;DCD     DMA1_Stream4_IRQHandler           ; DMA1 Stream
+                        4                                   
+  103 00000000         ;DCD     DMA1_Stream5_IRQHandler           ; DMA1 Stream
+                        5                                   
+  104 00000000         ;DCD     DMA1_Stream6_IRQHandler           ; DMA1 Stream
+                        6                                   
+  105 00000000         ;DCD     ADC_IRQHandler                    ; ADC1, ADC2 
+                       and ADC3s                            
+  106 00000000         ;DCD     CAN1_TX_IRQHandler                ; CAN1 TX    
+                                                                   
+  107 00000000         ;DCD     CAN1_RX0_IRQHandler               ; CAN1 RX0   
+                                                                   
+  108 00000000         ;DCD     CAN1_RX1_IRQHandler               ; CAN1 RX1   
+                                                                   
+  109 00000000         ;DCD     CAN1_SCE_IRQHandler               ; CAN1 SCE   
+                                                                   
+  110 00000000         ;DCD     EXTI9_5_IRQHandler                ; External Li
+                       ne[9:5]s                                    
+  111 00000000         ;DCD     TIM1_BRK_TIM9_IRQHandler          ; TIM1 Break 
+                       and TIM9                   
+  112 00000000         ;DCD     TIM1_UP_TIM10_IRQHandler          ; TIM1 Update
+                        and TIM10                 
+  113 00000000         ;DCD     TIM1_TRG_COM_TIM11_IRQHandler     ; TIM1 Trigge
+                       r and Commutation and TIM11
+  114 00000000         ;DCD     TIM1_CC_IRQHandler                ; TIM1 Captur
+                       e Compare                                   
+  115 00000000         ;DCD     TIM2_IRQHandler                   ; TIM2       
+                                                            
+  116 00000000         ;DCD     TIM3_IRQHandler                   ; TIM3       
+                                                            
+  117 00000000         ;DCD     TIM4_IRQHandler                   ; TIM4       
+                                                            
+  118 00000000         ;DCD     I2C1_EV_IRQHandler                ; I2C1 Event 
+                                                                   
+  119 00000000         ;DCD     I2C1_ER_IRQHandler                ; I2C1 Error 
+                                                                   
+  120 00000000         ;DCD     I2C2_EV_IRQHandler                ; I2C2 Event 
+                                                                   
+  121 00000000         ;DCD     I2C2_ER_IRQHandler                ; I2C2 Error 
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+                                                                     
+  122 00000000         ;DCD     SPI1_IRQHandler                   ; SPI1       
+                                                            
+  123 00000000         ;DCD     SPI2_IRQHandler                   ; SPI2       
+                                                            
+  124 00000000         ;DCD     USART1_IRQHandler                 ; USART1     
+                                                            
+  125 00000000         ;DCD     USART2_IRQHandler                 ; USART2     
+                                                            
+  126 00000000         ;DCD     USART3_IRQHandler                 ; USART3     
+                                                            
+  127 00000000         ;DCD     EXTI15_10_IRQHandler              ; External Li
+                       ne[15:10]s                                  
+  128 00000000         ;DCD     RTC_Alarm_IRQHandler              ; RTC Alarm (
+                       A and B) through EXTI Line                  
+  129 00000000         ;DCD     OTG_FS_WKUP_IRQHandler            ; USB OTG FS 
+                       Wakeup through EXTI line                        
+  130 00000000         ;DCD     TIM8_BRK_TIM12_IRQHandler         ; TIM8 Break 
+                       and TIM12                  
+  131 00000000         ;DCD     TIM8_UP_TIM13_IRQHandler          ; TIM8 Update
+                        and TIM13                 
+  132 00000000         ;DCD     TIM8_TRG_COM_TIM14_IRQHandler     ; TIM8 Trigge
+                       r and Commutation and TIM14
+  133 00000000         ;DCD     TIM8_CC_IRQHandler                ; TIM8 Captur
+                       e Compare                                   
+  134 00000000         ;DCD     DMA1_Stream7_IRQHandler           ; DMA1 Stream
+                       7                                           
+  135 00000000         ;DCD     FSMC_IRQHandler                   ; FSMC       
+                                                            
+  136 00000000         ;DCD     SDIO_IRQHandler                   ; SDIO       
+                                                            
+  137 00000000         ;DCD     TIM5_IRQHandler                   ; TIM5       
+                                                            
+  138 00000000         ;DCD     SPI3_IRQHandler                   ; SPI3       
+                                                            
+  139 00000000         ;DCD     UART4_IRQHandler                  ; UART4      
+                                                            
+  140 00000000         ;DCD     UART5_IRQHandler                  ; UART5      
+                                                            
+  141 00000000         ;DCD     TIM6_DAC_IRQHandler               ; TIM6 and DA
+                       C1&2 underrun errors                   
+  142 00000000         ;DCD     TIM7_IRQHandler                   ; TIM7       
+                                   
+  143 00000000         ;DCD     DMA2_Stream0_IRQHandler           ; DMA2 Stream
+                        0                                   
+  144 00000000         ;DCD     DMA2_Stream1_IRQHandler           ; DMA2 Stream
+                        1                                   
+  145 00000000         ;DCD     DMA2_Stream2_IRQHandler           ; DMA2 Stream
+                        2                                   
+  146 00000000         ;DCD     DMA2_Stream3_IRQHandler           ; DMA2 Stream
+                        3                                   
+  147 00000000         ;DCD     DMA2_Stream4_IRQHandler           ; DMA2 Stream
+                        4                                   
+  148 00000000         ;DCD     ETH_IRQHandler                    ; Ethernet   
+                                                            
+  149 00000000         ;DCD     ETH_WKUP_IRQHandler               ; Ethernet Wa
+                       keup through EXTI line                      
+  150 00000000         ;DCD     CAN2_TX_IRQHandler                ; CAN2 TX    
+                                                                   
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  151 00000000         ;DCD     CAN2_RX0_IRQHandler               ; CAN2 RX0   
+                                                                   
+  152 00000000         ;DCD     CAN2_RX1_IRQHandler               ; CAN2 RX1   
+                                                                   
+  153 00000000         ;DCD     CAN2_SCE_IRQHandler               ; CAN2 SCE   
+                                                                   
+  154 00000000         ;DCD     OTG_FS_IRQHandler                 ; USB OTG FS 
+                                                            
+  155 00000000         ;DCD     DMA2_Stream5_IRQHandler           ; DMA2 Stream
+                        5                                   
+  156 00000000         ;DCD     DMA2_Stream6_IRQHandler           ; DMA2 Stream
+                        6                                   
+  157 00000000         ;DCD     DMA2_Stream7_IRQHandler           ; DMA2 Stream
+                        7                                   
+  158 00000000         ;DCD     USART6_IRQHandler                 ; USART6     
+                                                             
+  159 00000000         ;DCD     I2C3_EV_IRQHandler                ; I2C3 event 
+                                                                   
+  160 00000000         ;DCD     I2C3_ER_IRQHandler                ; I2C3 error 
+                                                                   
+  161 00000000         ;DCD     OTG_HS_EP1_OUT_IRQHandler         ; USB OTG HS 
+                       End Point 1 Out                      
+  162 00000000         ;DCD     OTG_HS_EP1_IN_IRQHandler          ; USB OTG HS 
+                       End Point 1 In                       
+  163 00000000         ;DCD     OTG_HS_WKUP_IRQHandler            ; USB OTG HS 
+                       Wakeup through EXTI                         
+  164 00000000         ;DCD     OTG_HS_IRQHandler                 ; USB OTG HS 
+                                                            
+  165 00000000         ;DCD     DCMI_IRQHandler                   ; DCMI       
+                                                            
+  166 00000000         ;DCD     CRYP_IRQHandler                   ; CRYP crypto
+                                                            
+  167 00000000         ;DCD     HASH_RNG_IRQHandler               ; Hash and Rn
+                       g
+  168 00000000         ;DCD     FPU_IRQHandler                    ; FPU
+  169 00000000         
+  170 00000000         ;__Vectors_End
+  171 00000000         
+  172 00000000         ;__Vectors_Size  EQU  __Vectors_End - __Vectors
+  173 00000000         
+  174 00000000         ;AREA    |.text|, CODE, READONLY
+  175 00000000         
+  176 00000000         ;; Reset handler
+  177 00000000         ;Reset_Handler    PROC
+  178 00000000         ;EXPORT  Reset_Handler             [WEAK]
+  179 00000000         ;IMPORT  SystemInit
+  180 00000000         ;IMPORT  __main
+  181 00000000         
+  182 00000000         ;LDR     R0, =SystemInit
+  183 00000000         ;BLX     R0
+  184 00000000         ;LDR     R0, =__main
+  185 00000000         ;BX      R0
+  186 00000000         ;ENDP
+  187 00000000         
+  188 00000000         ;; Dummy Exception Handlers (infinite loops which can be
+                        modified)
+  189 00000000         
+  190 00000000         ;NMI_Handler     PROC
+  191 00000000         ;EXPORT  NMI_Handler                [WEAK]
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+  192 00000000         ;B       .
+  193 00000000         ;ENDP
+  195 00000000         ;HardFault_Handler                 ;PROC
+  196 00000000         ;EXPORT  HardFault_Handler          [WEAK]
+  197 00000000         ;B       .
+  198 00000000         ;ENDP
+  200 00000000         ;MemManage_Handler                 ;PROC
+  201 00000000         ;EXPORT  MemManage_Handler          [WEAK]
+  202 00000000         ;B       .
+  203 00000000         ;ENDP
+  205 00000000         ;BusFault_Handler                 ;PROC
+  206 00000000         ;EXPORT  BusFault_Handler           [WEAK]
+  207 00000000         ;B       .
+  208 00000000         ;ENDP
+  210 00000000         ;UsageFault_Handler                 ;PROC
+  211 00000000         ;EXPORT  UsageFault_Handler         [WEAK]
+  212 00000000         ;B       .
+  213 00000000         ;ENDP
+  214 00000000         ;SVC_Handler     PROC
+  215 00000000         ;EXPORT  SVC_Handler                [WEAK]
+  216 00000000         ;B       .
+  217 00000000         ;ENDP
+  219 00000000         ;DebugMon_Handler                 ;PROC
+  220 00000000         ;EXPORT  DebugMon_Handler           [WEAK]
+  221 00000000         ;B       .
+  222 00000000         ;ENDP
+  223 00000000         ;PendSV_Handler  PROC
+  224 00000000         ;EXPORT  PendSV_Handler             [WEAK]
+  225 00000000         ;B       .
+  226 00000000         ;ENDP
+  227 00000000         ;SysTick_Handler PROC
+  228 00000000         ;EXPORT  SysTick_Handler            [WEAK]
+  229 00000000         ;B       .
+  230 00000000         ;ENDP
+  231 00000000         
+  232 00000000         ;Default_Handler PROC
+  233 00000000         
+  234 00000000         ;EXPORT  WWDG_IRQHandler                   [WEAK]       
+                                                        
+  235 00000000         ;EXPORT  PVD_IRQHandler                    [WEAK]       
+                                      
+  236 00000000         ;EXPORT  TAMP_STAMP_IRQHandler             [WEAK]       
+                         
+  237 00000000         ;EXPORT  RTC_WKUP_IRQHandler               [WEAK]       
+                                     
+  238 00000000         ;EXPORT  FLASH_IRQHandler                  [WEAK]       
+                                                         
+  239 00000000         ;EXPORT  RCC_IRQHandler                    [WEAK]       
+                                                            
+  240 00000000         ;EXPORT  EXTI0_IRQHandler                  [WEAK]       
+                                                            
+  241 00000000         ;EXPORT  EXTI1_IRQHandler                  [WEAK]       
+                                                             
+  242 00000000         ;EXPORT  EXTI2_IRQHandler                  [WEAK]       
+                                                            
+  243 00000000         ;EXPORT  EXTI3_IRQHandler                  [WEAK]       
+                                                           
+  244 00000000         ;EXPORT  EXTI4_IRQHandler                  [WEAK]       
+                                                            
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+  245 00000000         ;EXPORT  DMA1_Stream0_IRQHandler           [WEAK]       
+                                                
+  246 00000000         ;EXPORT  DMA1_Stream1_IRQHandler           [WEAK]       
+                                                   
+  247 00000000         ;EXPORT  DMA1_Stream2_IRQHandler           [WEAK]       
+                                                   
+  248 00000000         ;EXPORT  DMA1_Stream3_IRQHandler           [WEAK]       
+                                                   
+  249 00000000         ;EXPORT  DMA1_Stream4_IRQHandler           [WEAK]       
+                                                   
+  250 00000000         ;EXPORT  DMA1_Stream5_IRQHandler           [WEAK]       
+                                                   
+  251 00000000         ;EXPORT  DMA1_Stream6_IRQHandler           [WEAK]       
+                                                   
+  252 00000000         ;EXPORT  ADC_IRQHandler                    [WEAK]       
+                                         
+  253 00000000         ;EXPORT  CAN1_TX_IRQHandler                [WEAK]       
+                                                                
+  254 00000000         ;EXPORT  CAN1_RX0_IRQHandler               [WEAK]       
+                                                               
+  255 00000000         ;EXPORT  CAN1_RX1_IRQHandler               [WEAK]       
+                                                                
+  256 00000000         ;EXPORT  CAN1_SCE_IRQHandler               [WEAK]       
+                                                                
+  257 00000000         ;EXPORT  EXTI9_5_IRQHandler                [WEAK]       
+                                                    
+  258 00000000         ;EXPORT  TIM1_BRK_TIM9_IRQHandler          [WEAK]       
+                                  
+  259 00000000         ;EXPORT  TIM1_UP_TIM10_IRQHandler          [WEAK]       
+                                
+  260 00000000         ;EXPORT  TIM1_TRG_COM_TIM11_IRQHandler     [WEAK] 
+  261 00000000         ;EXPORT  TIM1_CC_IRQHandler                [WEAK]       
+                                                   
+  262 00000000         ;EXPORT  TIM2_IRQHandler                   [WEAK]       
+                                                            
+  263 00000000         ;EXPORT  TIM3_IRQHandler                   [WEAK]       
+                                                            
+  264 00000000         ;EXPORT  TIM4_IRQHandler                   [WEAK]       
+                                                            
+  265 00000000         ;EXPORT  I2C1_EV_IRQHandler                [WEAK]       
+                                                             
+  266 00000000         ;EXPORT  I2C1_ER_IRQHandler                [WEAK]       
+                                                             
+  267 00000000         ;EXPORT  I2C2_EV_IRQHandler                [WEAK]       
+                                                            
+  268 00000000         ;EXPORT  I2C2_ER_IRQHandler                [WEAK]       
+                                                               
+  269 00000000         ;EXPORT  SPI1_IRQHandler                   [WEAK]       
+                                                           
+  270 00000000         ;EXPORT  SPI2_IRQHandler                   [WEAK]       
+                                                            
+  271 00000000         ;EXPORT  USART1_IRQHandler                 [WEAK]       
+                                                          
+  272 00000000         ;EXPORT  USART2_IRQHandler                 [WEAK]       
+                                                          
+  273 00000000         ;EXPORT  USART3_IRQHandler                 [WEAK]       
+                                                         
+  274 00000000         ;EXPORT  EXTI15_10_IRQHandler              [WEAK]       
+                                                  
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+  275 00000000         ;EXPORT  RTC_Alarm_IRQHandler              [WEAK]       
+                                  
+  276 00000000         ;EXPORT  OTG_FS_WKUP_IRQHandler            [WEAK]       
+                                        
+  277 00000000         ;EXPORT  TIM8_BRK_TIM12_IRQHandler         [WEAK]       
+                                 
+  278 00000000         ;EXPORT  TIM8_UP_TIM13_IRQHandler          [WEAK]       
+                                 
+  279 00000000         ;EXPORT  TIM8_TRG_COM_TIM14_IRQHandler     [WEAK] 
+  280 00000000         ;EXPORT  TIM8_CC_IRQHandler                [WEAK]       
+                                                   
+  281 00000000         ;EXPORT  DMA1_Stream7_IRQHandler           [WEAK]       
+                                                          
+  282 00000000         ;EXPORT  FSMC_IRQHandler                   [WEAK]       
+                                                             
+  283 00000000         ;EXPORT  SDIO_IRQHandler                   [WEAK]       
+                                                             
+  284 00000000         ;EXPORT  TIM5_IRQHandler                   [WEAK]       
+                                                             
+  285 00000000         ;EXPORT  SPI3_IRQHandler                   [WEAK]       
+                                                             
+  286 00000000         ;EXPORT  UART4_IRQHandler                  [WEAK]       
+                                                            
+  287 00000000         ;EXPORT  UART5_IRQHandler                  [WEAK]       
+                                                            
+  288 00000000         ;EXPORT  TIM6_DAC_IRQHandler               [WEAK]       
+                                   
+  289 00000000         ;EXPORT  TIM7_IRQHandler                   [WEAK]       
+                                    
+  290 00000000         ;EXPORT  DMA2_Stream0_IRQHandler           [WEAK]       
+                                                  
+  291 00000000         ;EXPORT  DMA2_Stream1_IRQHandler           [WEAK]       
+                                                   
+  292 00000000         ;EXPORT  DMA2_Stream2_IRQHandler           [WEAK]       
+                                                    
+  293 00000000         ;EXPORT  DMA2_Stream3_IRQHandler           [WEAK]       
+                                                    
+  294 00000000         ;EXPORT  DMA2_Stream4_IRQHandler           [WEAK]       
+                                                 
+  295 00000000         ;EXPORT  ETH_IRQHandler                    [WEAK]       
+                                                         
+  296 00000000         ;EXPORT  ETH_WKUP_IRQHandler               [WEAK]       
+                                     
+  297 00000000         ;EXPORT  CAN2_TX_IRQHandler                [WEAK]       
+                                                               
+  298 00000000         ;EXPORT  CAN2_RX0_IRQHandler               [WEAK]       
+                                                               
+  299 00000000         ;EXPORT  CAN2_RX1_IRQHandler               [WEAK]       
+                                                               
+  300 00000000         ;EXPORT  CAN2_SCE_IRQHandler               [WEAK]       
+                                                               
+  301 00000000         ;EXPORT  OTG_FS_IRQHandler                 [WEAK]       
+                                                       
+  302 00000000         ;EXPORT  DMA2_Stream5_IRQHandler           [WEAK]       
+                                                   
+  303 00000000         ;EXPORT  DMA2_Stream6_IRQHandler           [WEAK]       
+                                                   
+  304 00000000         ;EXPORT  DMA2_Stream7_IRQHandler           [WEAK]       
+                                                   
+
+
+
+ARM Macro Assembler    Page 9 
+
+
+  305 00000000         ;EXPORT  USART6_IRQHandler                 [WEAK]       
+                                                           
+  306 00000000         ;EXPORT  I2C3_EV_IRQHandler                [WEAK]       
+                                                              
+  307 00000000         ;EXPORT  I2C3_ER_IRQHandler                [WEAK]       
+                                                              
+  308 00000000         ;EXPORT  OTG_HS_EP1_OUT_IRQHandler         [WEAK]       
+                                      
+  309 00000000         ;EXPORT  OTG_HS_EP1_IN_IRQHandler          [WEAK]       
+                                      
+  310 00000000         ;EXPORT  OTG_HS_WKUP_IRQHandler            [WEAK]       
+                                        
+  311 00000000         ;EXPORT  OTG_HS_IRQHandler                 [WEAK]       
+                                                      
+  312 00000000         ;EXPORT  DCMI_IRQHandler                   [WEAK]       
+                                                             
+  313 00000000         ;EXPORT  CRYP_IRQHandler                   [WEAK]       
+                                                     
+  314 00000000         ;EXPORT  HASH_RNG_IRQHandler               [WEAK]
+  315 00000000         ;EXPORT  FPU_IRQHandler                    [WEAK]
+  316 00000000         
+  317 00000000         ;WWDG_IRQHandler                                        
+                                      
+  318 00000000         ;PVD_IRQHandler                                      
+  319 00000000         ;TAMP_STAMP_IRQHandler                  
+  320 00000000         ;RTC_WKUP_IRQHandler                                
+  321 00000000         ;FLASH_IRQHandler                                       
+                                       
+  322 00000000         ;RCC_IRQHandler                                         
+                                          
+  323 00000000         ;EXTI0_IRQHandler                                       
+                                          
+  324 00000000         ;EXTI1_IRQHandler                                       
+                                           
+  325 00000000         ;EXTI2_IRQHandler                                       
+                                          
+  326 00000000         ;EXTI3_IRQHandler                                       
+                                         
+  327 00000000         ;EXTI4_IRQHandler                                       
+                                          
+  328 00000000         ;DMA1_Stream0_IRQHandler                                
+                              
+  329 00000000         ;DMA1_Stream1_IRQHandler                                
+                                 
+  330 00000000         ;DMA1_Stream2_IRQHandler                                
+                                 
+  331 00000000         ;DMA1_Stream3_IRQHandler                                
+                                 
+  332 00000000         ;DMA1_Stream4_IRQHandler                                
+                                 
+  333 00000000         ;DMA1_Stream5_IRQHandler                                
+                                 
+  334 00000000         ;DMA1_Stream6_IRQHandler                                
+                                 
+  335 00000000         ;ADC_IRQHandler                                         
+                       
+  336 00000000         ;CAN1_TX_IRQHandler                                     
+                                              
+  337 00000000         ;CAN1_RX0_IRQHandler                                    
+
+
+
+ARM Macro Assembler    Page 10 
+
+
+                                             
+  338 00000000         ;CAN1_RX1_IRQHandler                                    
+                                              
+  339 00000000         ;CAN1_SCE_IRQHandler                                    
+                                              
+  340 00000000         ;EXTI9_5_IRQHandler                                     
+                                  
+  341 00000000         ;TIM1_BRK_TIM9_IRQHandler                        
+  342 00000000         ;TIM1_UP_TIM10_IRQHandler                      
+  343 00000000         ;TIM1_TRG_COM_TIM11_IRQHandler  
+  344 00000000         ;TIM1_CC_IRQHandler                                     
+                                 
+  345 00000000         ;TIM2_IRQHandler                                        
+                                          
+  346 00000000         ;TIM3_IRQHandler                                        
+                                          
+  347 00000000         ;TIM4_IRQHandler                                        
+                                          
+  348 00000000         ;I2C1_EV_IRQHandler                                     
+                                           
+  349 00000000         ;I2C1_ER_IRQHandler                                     
+                                           
+  350 00000000         ;I2C2_EV_IRQHandler                                     
+                                          
+  351 00000000         ;I2C2_ER_IRQHandler                                     
+                                             
+  352 00000000         ;SPI1_IRQHandler                                        
+                                         
+  353 00000000         ;SPI2_IRQHandler                                        
+                                          
+  354 00000000         ;USART1_IRQHandler                                      
+                                        
+  355 00000000         ;USART2_IRQHandler                                      
+                                        
+  356 00000000         ;USART3_IRQHandler                                      
+                                       
+  357 00000000         ;EXTI15_10_IRQHandler                                   
+                                
+  358 00000000         ;RTC_Alarm_IRQHandler                            
+  359 00000000         ;OTG_FS_WKUP_IRQHandler                                
+  360 00000000         ;TIM8_BRK_TIM12_IRQHandler                      
+  361 00000000         ;TIM8_UP_TIM13_IRQHandler                       
+  362 00000000         ;TIM8_TRG_COM_TIM14_IRQHandler  
+  363 00000000         ;TIM8_CC_IRQHandler                                     
+                                 
+  364 00000000         ;DMA1_Stream7_IRQHandler                                
+                                        
+  365 00000000         ;FSMC_IRQHandler                                        
+                                           
+  366 00000000         ;SDIO_IRQHandler                                        
+                                           
+  367 00000000         ;TIM5_IRQHandler                                        
+                                           
+  368 00000000         ;SPI3_IRQHandler                                        
+                                           
+  369 00000000         ;UART4_IRQHandler                                       
+                                          
+  370 00000000         ;UART5_IRQHandler                                       
+                                          
+
+
+
+ARM Macro Assembler    Page 11 
+
+
+  371 00000000         ;TIM6_DAC_IRQHandler                            
+  372 00000000         ;TIM7_IRQHandler                              
+  373 00000000         ;DMA2_Stream0_IRQHandler                                
+                                
+  374 00000000         ;DMA2_Stream1_IRQHandler                                
+                                 
+  375 00000000         ;DMA2_Stream2_IRQHandler                                
+                                  
+  376 00000000         ;DMA2_Stream3_IRQHandler                                
+                                  
+  377 00000000         ;DMA2_Stream4_IRQHandler                                
+                               
+  378 00000000         ;ETH_IRQHandler                                         
+                                       
+  379 00000000         ;ETH_WKUP_IRQHandler                                
+  380 00000000         ;CAN2_TX_IRQHandler                                     
+                                             
+  381 00000000         ;CAN2_RX0_IRQHandler                                    
+                                             
+  382 00000000         ;CAN2_RX1_IRQHandler                                    
+                                             
+  383 00000000         ;CAN2_SCE_IRQHandler                                    
+                                             
+  384 00000000         ;OTG_FS_IRQHandler                                      
+                                     
+  385 00000000         ;DMA2_Stream5_IRQHandler                                
+                                 
+  386 00000000         ;DMA2_Stream6_IRQHandler                                
+                                 
+  387 00000000         ;DMA2_Stream7_IRQHandler                                
+                                 
+  388 00000000         ;USART6_IRQHandler                                      
+                                         
+  389 00000000         ;I2C3_EV_IRQHandler                                     
+                                            
+  390 00000000         ;I2C3_ER_IRQHandler                                     
+                                            
+  391 00000000         ;OTG_HS_EP1_OUT_IRQHandler                           
+  392 00000000         ;OTG_HS_EP1_IN_IRQHandler                            
+  393 00000000         ;OTG_HS_WKUP_IRQHandler                                
+  394 00000000         ;OTG_HS_IRQHandler                                      
+                                    
+  395 00000000         ;DCMI_IRQHandler                                        
+                                           
+  396 00000000         ;CRYP_IRQHandler                                        
+                                   
+  397 00000000         ;HASH_RNG_IRQHandler
+  398 00000000         ;FPU_IRQHandler
+  399 00000000         
+  400 00000000         ;B       .
+  401 00000000         
+  402 00000000         ;ENDP
+  403 00000000         
+  404 00000000         ;ALIGN
+  405 00000000         
+  406 00000000         ;;******************************************************
+                       *************************
+  407 00000000         ;; User Stack and Heap initialization
+  408 00000000         ;;******************************************************
+
+
+
+ARM Macro Assembler    Page 12 
+
+
+                       *************************
+  409 00000000         ;IF      :DEF:__MICROLIB
+  410 00000000         
+  411 00000000         ;EXPORT  __initial_sp
+  412 00000000         ;EXPORT  __heap_base
+  413 00000000         ;EXPORT  __heap_limit
+  414 00000000         
+  415 00000000         ;ELSE
+  416 00000000         
+  417 00000000         ;IMPORT  __use_two_region_memory
+  418 00000000         ;EXPORT  __user_initial_stackheap
+  419 00000000         
+  420 00000000         ;__user_initial_stackheap
+  421 00000000         
+  422 00000000         ;LDR     R0, =  Heap_Mem
+  423 00000000         ;LDR     R1, =(Stack_Mem + Stack_Size)
+  424 00000000         ;LDR     R2, = (Heap_Mem +  Heap_Size)
+  425 00000000         ;LDR     R3, = Stack_Mem
+  426 00000000         ;BX      LR
+  427 00000000         
+  428 00000000         ;ALIGN
+  429 00000000         
+  430 00000000         ;ENDIF
+  431 00000000         
+  432 00000000                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=..\obj\startup_stm32f40_41xxx.d -o..\obj\startup_stm32f40_41xxx
+.o -I"D:\1111111\练兵\ZBAR二维码\实验35 摄像头实验\USER\RTE" -IF:\Keil_v5\ARM\P
+ACK\Keil\STM32F4xx_DFP\2.9.0 -IF:\Keil_v5\ARM\CMSIS\Include --predefine="__UVIS
+ION_VERSION SETA 514" --predefine="STM32F407xx SETA 1" --list=..\obj\startup_st
+m32f40_41xxx.lst ..\CORE\startup_stm32f40_41xxx.s
+332 symbols in table

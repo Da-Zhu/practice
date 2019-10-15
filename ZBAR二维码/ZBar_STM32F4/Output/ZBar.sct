@@ -1,0 +1,24 @@
+LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
+    ER_IROM1 0x08000000 0x00100000  {  ; load address = execution address
+    *.o (RESET, +First)
+    *(InRoot$$Sections)
+    .ANY (+RO)
+    }
+    
+
+    RW_IRAM_DATA 0x20000000 0x00030000 {  ; RW data
+    .ANY (+RW +ZI)
+    }
+    
+    
+    ARM_LIB_STACK 0x20030000 EMPTY -(0x20030000 - ImageLimit(RW_IRAM_DATA))  ; Stack region growing down
+    { }
+   
+   
+    RW_ERAM 0xD0000000 0x00800000 { ;Extern SDRAM
+    main.o(+RW +ZI)
+    }
+    
+    ARM_LIB_HEAP +0 EMPTY  (0xD0800000 - ImageLimit(RW_ERAM)) ; Heap region growing up
+    { }
+}

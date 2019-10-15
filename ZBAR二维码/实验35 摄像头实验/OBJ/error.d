@@ -1,0 +1,10 @@
+..\obj\error.o: ..\ZBAR\error.c
+..\obj\error.o: ..\ZBAR\error.h
+..\obj\error.o: ..\ZBAR\config.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+..\obj\error.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\obj\error.o: ..\ZBAR\zbar.h

@@ -1,0 +1,15 @@
+..\obj\ean.o: ..\ZBAR\decoder\ean.c
+..\obj\ean.o: ..\ZBAR\config.h
+..\obj\ean.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\ean.o: ..\ZBAR\zbar.h
+..\obj\ean.o: ..\ZBAR\decoder.h
+..\obj\ean.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\ean.o: ..\ZBAR\decoder/ean.h
+..\obj\ean.o: ..\ZBAR\decoder/i25.h
+..\obj\ean.o: ..\ZBAR\decoder/code39.h
+..\obj\ean.o: ..\ZBAR\decoder/code128.h
+..\obj\ean.o: ..\ZBAR\decoder/pdf417.h
+..\obj\ean.o: ..\ZBAR\decoder/qr_finder.h
+..\obj\ean.o: ..\ZBAR\qrcode.h
+..\obj\ean.o: ..\ZBAR\debug.h
+..\obj\ean.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

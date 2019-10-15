@@ -1,0 +1,16 @@
+..\obj\code128.o: ..\ZBAR\decoder\code128.c
+..\obj\code128.o: ..\ZBAR\config.h
+..\obj\code128.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\code128.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\code128.o: ..\ZBAR\zbar.h
+..\obj\code128.o: ..\ZBAR\decoder.h
+..\obj\code128.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\code128.o: ..\ZBAR\decoder/ean.h
+..\obj\code128.o: ..\ZBAR\decoder/i25.h
+..\obj\code128.o: ..\ZBAR\decoder/code39.h
+..\obj\code128.o: ..\ZBAR\decoder/code128.h
+..\obj\code128.o: ..\ZBAR\decoder/pdf417.h
+..\obj\code128.o: ..\ZBAR\decoder/qr_finder.h
+..\obj\code128.o: ..\ZBAR\qrcode.h
+..\obj\code128.o: ..\ZBAR\debug.h
+..\obj\code128.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

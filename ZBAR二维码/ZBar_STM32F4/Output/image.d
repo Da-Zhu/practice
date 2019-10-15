@@ -1,0 +1,15 @@
+..\..\output\image.o: ..\..\zbar\image.c
+..\..\output\image.o: ..\..\zbar\error.h
+..\..\output\image.o: ..\..\zbar\config.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\image.o: ..\..\zbar\zbar.h
+..\..\output\image.o: ..\..\zbar\image.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\..\output\image.o: ..\..\zbar\symbol.h
+..\..\output\image.o: ..\..\zbar\refcnt.h
+..\..\output\image.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h

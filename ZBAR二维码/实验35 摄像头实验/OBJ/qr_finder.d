@@ -1,0 +1,16 @@
+..\obj\qr_finder.o: ..\ZBAR\decoder\qr_finder.c
+..\obj\qr_finder.o: ..\ZBAR\config.h
+..\obj\qr_finder.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\qr_finder.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
+..\obj\qr_finder.o: ..\ZBAR\zbar.h
+..\obj\qr_finder.o: ..\ZBAR\decoder.h
+..\obj\qr_finder.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/ean.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/i25.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/code39.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/code128.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/pdf417.h
+..\obj\qr_finder.o: ..\ZBAR\decoder/qr_finder.h
+..\obj\qr_finder.o: ..\ZBAR\qrcode.h
+..\obj\qr_finder.o: ..\ZBAR\debug.h
+..\obj\qr_finder.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

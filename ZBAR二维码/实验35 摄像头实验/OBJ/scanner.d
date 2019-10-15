@@ -1,0 +1,9 @@
+..\obj\scanner.o: ..\ZBAR\scanner.c
+..\obj\scanner.o: ..\ZBAR\config.h
+..\obj\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\scanner.o: ..\ZBAR\zbar.h
+..\obj\scanner.o: ..\ZBAR\svg.h
+..\obj\scanner.o: ..\ZBAR\debug.h
+..\obj\scanner.o: F:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
